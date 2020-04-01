@@ -11,7 +11,7 @@ class EditItemTest extends TestCase
         $editItem = new EditItem();
 
         $editedItem = $editItem->edit_one_item($fakeId, $fakeItemName);
-        $queryFakeItem = "UPDATE ShoppingList SET itemName=$fakeItemName, WHERE id=$fakeId";
+        $queryFakeItem = "UPDATE ShoppingList SET itemName='$fakeItemName', WHERE id=$fakeId";
 
         $this->assertEquals($queryFakeItem, $editedItem);
     }

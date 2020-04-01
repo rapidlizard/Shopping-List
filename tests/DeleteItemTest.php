@@ -6,7 +6,7 @@ class DeleteItemTest extends TestCase
 {
     public function test_delete_item_created_correct_query()
     {
-        $id = 1;
+        $id = 190;
         $deleteItem = new DeleteItem;
 
         $itemDeleted = $deleteItem->delete_one_item($id);

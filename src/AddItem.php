@@ -4,9 +4,8 @@ namespace App;
 
 class AddItem
 {
-    public function add_one_item(int $id, string $itemName)
+    public function add_one_item(int $id, string $name)
     {
-        $query = "INSERT INTO ShoppingList(id, itemName) VALUES($id,'$itemName')";
-        return $query;
+        return "INSERT INTO ShoppingList(id, itemName) VALUES($id,'$name')";
     }
 }
