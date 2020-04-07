@@ -26,6 +26,14 @@ class Controller
 
     public function add_item(string $name)
     {
-        $this->itemManager->add_one_item($name);
+        $result = $this->itemManager->add_one_item($name);
+        return $result;
     }
+
+    public function delete_item(int $id)
+    {
+        $result = $this->itemManager->delete_one_item($id);
+        return $result;
+    }
+
 }

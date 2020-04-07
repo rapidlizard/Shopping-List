@@ -26,7 +26,8 @@ class ItemManager
             }
         }
         if (mysqli_num_rows($result) == 0) {
-            return "0 results";
+            $emptyArray = array();
+            return $emptyArray;
         }
 
         return $items;
@@ -40,6 +41,9 @@ class ItemManager
 
     public function add_one_item(string $name)
     {
+        if($name == ""){
+            return false;
+        }
         $query = $this->create_add_one_item_query($name);
         mysqli_query($this->dbConnection, $query);
     }
