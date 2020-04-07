@@ -49,14 +49,14 @@ class ItemManager
     }
 
 
-    public function edit_one_item(int $id, string $newName)
+    public function create_edit_one_item_query(int $id, string $newName)
     {
-        return "UPDATE item_list SET itemName='$newName', WHERE id=$id";
+        return "UPDATE item_list SET itemName='$newName' WHERE id=$id";
     }
 
-    public function edit_one_item_from_DB(int $id, string $name)
+    public function edit_one_item(int $id, string $name)
     {
-        $query = $this->edit_one_item($id, $name);
+        $query = $this->create_edit_one_item_query($id, $name);
         mysqli_query($this->dbConnection, $query);
     }
 
@@ -68,7 +68,7 @@ class ItemManager
 
     public function delete_one_item(int $id)
     {
-        $query = $this->delete_one_item($id);
+        $query = $this->create_delete_one_item_query($id);
         mysqli_query($this->dbConnection, $query);
     }
 

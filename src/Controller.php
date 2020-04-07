@@ -36,4 +36,10 @@ class Controller
         return $result;
     }
 
+    public function edit_item(int $id, string $newName)
+    {
+        $result = $this->itemManager->edit_one_item($id, $newName);
+        return $result;
+    }
+
 }

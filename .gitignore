@@ -2,3 +2,4 @@
 vendor/
 .phpunit.result.cache
 poop.php
+index.html
