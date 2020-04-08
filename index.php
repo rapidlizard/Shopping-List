@@ -97,24 +97,26 @@ if ($action == 'change_item_status_0' && isset($_POST['change_item_status'])) {
         <h1><a href="index.php">Shopping List</a></h1>
     </header>
 
-    <main>
-        <div class="itemNameForm">
-            <form action="index.php?action=add_item" method="POST">
-                <input class="newItemInput" type="text" name="item_name" placeholder="Enter item name...">
-                <!-- <input type="submit" name="submitNewItem" class="cta"> -->
+    <div class="main_footer">
+        <main>
+            <div class="itemNameForm">
+                <form action="index.php?action=add_item" method="POST">
+                    <input class="newItemInput" type="text" name="item_name" placeholder="Enter item name...">
+                    <!-- <input type="submit" name="submitNewItem" class="cta"> -->
+                </form>
+            </div>
+            <div class="itemList">
+                <?php
+                echo $controller->read_list();
+                ?>
+            </div>
+        </main>
+        <footer>
+            <form action="index.php?action=delete_all" class="footerForm" method="POST">
+                <button type="submit" name="delete_all_items" class="cta">Delete all items</button>
             </form>
-        </div>
-        <div class="itemList">
-            <?php
-            echo $controller->read_list();
-            ?>
-        </div>
-    </main>
-    <footer>
-        <form action="index.php?action=delete_all" class="footerForm" method="POST">
-            <button type="submit" name="delete_all_items" class="cta">Delete all items</button>
-        </form>
-    </footer>
+        </footer>
+    </div>
 </body>
 
 </html>
