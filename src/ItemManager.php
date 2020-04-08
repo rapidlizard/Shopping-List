@@ -21,7 +21,7 @@ class ItemManager
 
         if (mysqli_num_rows($result) > 0) {
             while ($item = mysqli_fetch_assoc($result)) {
-                $itemArray = array('id' => $item["id"], 'itemName' => $item["itemName"], "status" => $item["status"]);
+                $itemArray = array('id' => $item["id"], 'itemName' => $item["itemName"], "status" => $item["itemStatus"]);
                 array_push($items, $itemArray);
             }
         }
@@ -45,7 +45,8 @@ class ItemManager
             return false;
         }
         $query = $this->create_add_one_item_query($name);
-        mysqli_query($this->dbConnection, $query);
+        $result = mysqli_query($this->dbConnection, $query);
+        return $result;
     }
 
 
@@ -75,36 +76,47 @@ class ItemManager
 
     public function create_change_status_to_false_query(int $id)
     {
-        return "UPDATE item_list SET status=0, WHERE id=$id";
+        return "UPDATE item_list SET itemStatus = 0 WHERE id=$id";
     }
 
     public function change_item_status_false(int $id)
     {
         $query = $this->create_change_status_to_false_query($id);
-        mysqli_query($this->dbConnection, $query);
+        $result = mysqli_query($this->dbConnection, $query);
+        if(!$result){
+            return mysqli_error($this->dbConnection);
+        }
+        return $result;
     }
 
-    public function create_change_item_status_true_query(int $id)
+    public function create_change_status_true_query(int $id)
     {
-        return "UPDATE item_list SET status=1, WHERE id=$id";
+        return "UPDATE item_list SET itemStatus=1 WHERE id=$id";
     }
 
-    public function set_item_status_false(int $id)
+    public function change_item_status_true(int $id)
     {
-        $query = $this->create_change_status_to_false_query($id);
-        mysqli_query($this->dbConnection, $query);
+        $query = $this->create_change_status_true_query($id);
+        $result = mysqli_query($this->dbConnection, $query);
+        if(!$result){
+            return mysqli_error($this->dbConnection);
+        }
+        return $result;
     }
 
     
     public function create_delete_all_items_query()
     {
-        return "DELETE FROM ShoppingList";
+        return "DELETE FROM item_list";
     }
-
+    
     public function delete_all_items()
     {
         $query = $this->create_delete_all_items_query();
-        mysqli_query($this->dbConnection, $query);
-        
+        $result = mysqli_query($this->dbConnection, $query);
+        if(!$result){
+            return mysqli_error($this->dbConnection);
+        }
+        return $result;
     }
 }

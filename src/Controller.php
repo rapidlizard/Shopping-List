@@ -36,16 +36,29 @@ class Controller
         return $result;
     }
 
+    
     public function edit_item(int $id, string $newName)
     {
         $result = $this->itemManager->edit_one_item($id, $newName);
         return $result;
     }
 
-
     public function delete_all()
     {
-        $this->itemManager->delete_all_items();
+        $result = $this->itemManager->delete_all_items();
+        return $result;
+    }
+
+    public function change_status_true(int $id)
+    {
+        $result = $this->itemManager->change_item_status_true($id);
+        return $result;
+    }
+
+    public function change_status_false(int $id)
+    {
+        $result = $this->itemManager->change_item_status_false($id);
+        return $result;
     }
 
 }

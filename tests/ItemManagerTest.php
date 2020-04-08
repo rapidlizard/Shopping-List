@@ -4,17 +4,19 @@ use App\ItemManager;
 
 class ItemManagerTest extends TestCase
 {
+    private $itemManager;
 
     public function setUp():void
     {
-        $this->itemManager = new ItemManager();
+        $db = 1;
+        $this->itemManager = new ItemManager($db);
     }
 
     public function test_add_item_created_correct_query()
     {
         $fakeItemName = 'milk';
 
-        $addedItem = $this->itemManager->add_one_item($fakeItemName);
+        $addedItem = $this->itemManager->create_add_one_item_query($fakeItemName);
         $queryFakeItem = "INSERT INTO item_list(itemName) VALUES('$fakeItemName')";
 
         $this->assertEquals($queryFakeItem, $addedItem);
@@ -25,8 +27,8 @@ class ItemManagerTest extends TestCase
         $fakeId = 1;
         $fakeItemName = 'milk';
 
-        $editedItem = $this->itemManager->edit_one_item($fakeId, $fakeItemName);
-        $queryFakeItem = "UPDATE item_list SET itemName='$fakeItemName', WHERE id=$fakeId";
+        $editedItem = $this->itemManager->create_edit_one_item_query($fakeId, $fakeItemName);
+        $queryFakeItem = "UPDATE item_list SET itemName='$fakeItemName' WHERE id=$fakeId";
 
         $this->assertEquals($queryFakeItem, $editedItem);
     }
@@ -35,7 +37,7 @@ class ItemManagerTest extends TestCase
     {
         $id = 1;
 
-        $itemDeleted = $this->itemManager->delete_one_item($id);
+        $itemDeleted = $this->itemManager->create_delete_one_item_query($id);
         $queryFakeItem = "DELETE FROM item_list WHERE id=$id";
 
         $this->assertEquals($queryFakeItem, $itemDeleted);
@@ -45,8 +47,8 @@ class ItemManagerTest extends TestCase
     {
         $id = 10;
 
-        $returnQuery = $this->itemManager->change_status_to_false($id);
-        $expectedQuery = "UPDATE item_list SET status=0, WHERE id=$id";
+        $returnQuery = $this->itemManager->create_change_status_to_false_query($id);
+        $expectedQuery = "UPDATE item_list SET itemStatus=0, WHERE id=$id";
 
         $this->assertEquals($expectedQuery, $returnQuery);
     }
@@ -55,24 +57,16 @@ class ItemManagerTest extends TestCase
     {
         $id = 10;
 
-        $returnQuery = $this->itemManager->change_status_to_true($id);
-        $expectedQuery = "UPDATE item_list SET status=1, WHERE id=$id";
+        $returnQuery = $this->itemManager->create_change_status_true_query($id);
+        $expectedQuery = "UPDATE item_list SET itemStatus=1, WHERE id=$id";
 
         $this->assertEquals($expectedQuery, $returnQuery);
     }
 
-
     public function test_create_delete_all_items_query()
     {
-        $fakeList = Array();
-            $item_1 = Array('id' => 1, 'name' => 'milk');
-            $item_2 = Array('id' => 2, 'name' => 'biscuits');
-            $item_3 = Array('id' => 3, 'name' => 'shampoo');
-        array_push($fakeList, $item_1, $item_2, $item_3);
-        $deleteAllItems = new DeleteAllItems;
-
-        $allItemsDeleted = $deleteAllItems->delete_all_items($fakeList);
-        $queryFakeItems = "DELETE FROM ShoppingList";
+        $allItemsDeleted = $this->itemManager->create_delete_all_items_query();
+        $queryFakeItems = "DELETE FROM item_list";
 
         $this->assertEquals($queryFakeItems, $allItemsDeleted);
     }

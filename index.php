@@ -32,6 +32,28 @@ if ($action == 'edit_item' && isset($_POST['item_new_name'])) {
     exit;
 }
 
+if ($action == 'delete_all' && isset($_POST['delete_all_items'])) {
+    $result = $controller->delete_all();
+    header('Location: ' . $_SERVER['PHP_SELF']);
+    exit;
+}
+
+if ($action == 'change_item_status_1' && isset($_POST['change_item_status'])) {
+    $itemIdString = $_GET['id'];
+    $itemId = (int)$itemIdString;
+    $result = $controller->change_status_true($itemId);
+    header('Location: ' . $_SERVER['PHP_SELF']);
+    exit;
+}
+
+if ($action == 'change_item_status_0' && isset($_POST['change_item_status'])) {
+    $itemIdString = $_GET['id'];
+    $itemId = (int)$itemIdString;
+    $result = $controller->change_status_false($itemId);
+    header('Location: ' . $_SERVER['PHP_SELF']);
+    exit;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -63,7 +85,7 @@ if ($action == 'edit_item' && isset($_POST['item_new_name'])) {
         </div>
     </main>
     <footer>
-        <form action="" class="footerForm">
+        <form action="index.php?action=delete_all" class="footerForm" method="POST">
             <button type="submit" name="delete_all_items" class="cta">Delete all items</button>
         </form>
     </footer>

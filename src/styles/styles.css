@@ -86,6 +86,9 @@ a {
     font-weight: 700;
 }
 
+.status0 {
+    text-decoration: line-through;
+}
 
 /* COMPONENTS */
 
@@ -133,6 +136,8 @@ a {
 }
 
 .itemName {
+    background-color: transparent;
+    font-size: 16px;
     display: flex;
     flex-direction: column;
     justify-content: center;
