@@ -48,7 +48,7 @@ class ItemManagerTest extends TestCase
         $id = 10;
 
         $returnQuery = $this->itemManager->create_change_status_to_false_query($id);
-        $expectedQuery = "UPDATE item_list SET itemStatus=0, WHERE id=$id";
+        $expectedQuery = "UPDATE item_list SET itemStatus=0 WHERE id=$id";
 
         $this->assertEquals($expectedQuery, $returnQuery);
     }
@@ -58,7 +58,7 @@ class ItemManagerTest extends TestCase
         $id = 10;
 
         $returnQuery = $this->itemManager->create_change_status_true_query($id);
-        $expectedQuery = "UPDATE item_list SET itemStatus=1, WHERE id=$id";
+        $expectedQuery = "UPDATE item_list SET itemStatus=1 WHERE id=$id";
 
         $this->assertEquals($expectedQuery, $returnQuery);
     }

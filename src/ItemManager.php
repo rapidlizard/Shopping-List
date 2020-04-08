@@ -76,7 +76,7 @@ class ItemManager
 
     public function create_change_status_to_false_query(int $id)
     {
-        return "UPDATE item_list SET itemStatus = 0 WHERE id=$id";
+        return "UPDATE item_list SET itemStatus=0 WHERE id=$id";
     }
 
     public function change_item_status_false(int $id)
