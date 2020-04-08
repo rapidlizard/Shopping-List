@@ -38,7 +38,7 @@ class View {
                             </form>
                             <?php
                         }
-                        ?>
+                    ?>
                     </div>
                     <div class="itemInteraction">
                         <form action="index.php?action=init_edit_item&id=<?php echo $itemList[$index]['id']?>&name=<?php echo $itemList[$index]['itemName']?>" method="POST">

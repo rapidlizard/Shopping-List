@@ -99,7 +99,7 @@ class ItemManager
         $query = $this->create_change_status_true_query($id);
         $result = mysqli_query($this->dbConnection, $query);
         if(!$result){
-            return mysqli_error($this->dbConnection);
+            return ($this->dbConnection);
         }
         return $result;
     }
