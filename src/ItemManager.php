@@ -94,4 +94,17 @@ class ItemManager
         $query = $this->create_change_status_to_false_query($id);
         mysqli_query($this->dbConnection, $query);
     }
+
+    
+    public function create_delete_all_items_query()
+    {
+        return "DELETE FROM ShoppingList";
+    }
+
+    public function delete_all_items()
+    {
+        $query = $this->create_delete_all_items_query();
+        mysqli_query($this->dbConnection, $query);
+        
+    }
 }

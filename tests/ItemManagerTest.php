@@ -60,4 +60,20 @@ class ItemManagerTest extends TestCase
 
         $this->assertEquals($expectedQuery, $returnQuery);
     }
+
+
+    public function test_create_delete_all_items_query()
+    {
+        $fakeList = Array();
+            $item_1 = Array('id' => 1, 'name' => 'milk');
+            $item_2 = Array('id' => 2, 'name' => 'biscuits');
+            $item_3 = Array('id' => 3, 'name' => 'shampoo');
+        array_push($fakeList, $item_1, $item_2, $item_3);
+        $deleteAllItems = new DeleteAllItems;
+
+        $allItemsDeleted = $deleteAllItems->delete_all_items($fakeList);
+        $queryFakeItems = "DELETE FROM ShoppingList";
+
+        $this->assertEquals($queryFakeItems, $allItemsDeleted);
+    }
 }

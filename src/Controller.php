@@ -42,4 +42,10 @@ class Controller
         return $result;
     }
 
+
+    public function delete_all()
+    {
+        $this->itemManager->delete_all_items();
+    }
+
 }
